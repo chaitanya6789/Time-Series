@@ -115,8 +115,29 @@ def load_model():
     except Exception as e:  # e.g. libomp missing on macOS
         st.error(f"xgboost could not be loaded: {e}\n\nOn macOS run:  brew install libomp")
         st.stop()
-    model = XGBRegressor()
-    model.load_model(path("xgb_model.json"))
+    model_path = path("xgb_model.json")
+    if os.path.exists(model_path):
+        try:
+            model = XGBRegressor()
+            model.load_model(model_path)
+            return model
+        except Exception:
+            # saved file is unreadable (different XGBoost version / corrupted upload)
+            # -> ignore it and train a fresh model below
+            pass
+    # No saved model in the repo -> train it once (about 1-2 minutes) and save it
+    from forecast_utils import make_feature_frame
+    with st.spinner("First start: training the XGBoost model (about 1-2 minutes, only happens once)..."):
+        s = load_data()
+        data = make_feature_frame(s).join(s).dropna()
+        model = XGBRegressor(n_estimators=500, learning_rate=0.05, max_depth=8, subsample=0.8,
+                             colsample_bytree=0.8, objective="reg:squarederror",
+                             tree_method="hist", random_state=42, n_jobs=-1)
+        model.fit(data[FEATURE_COLS], data[TARGET])
+        try:
+            model.save_model(model_path)
+        except Exception:
+            pass  # read-only disk: model simply stays in memory
     return model
 
 
