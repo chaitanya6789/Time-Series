@@ -1,0 +1,130 @@
+{
+  "model_comparison": [
+    {
+      "Model": "XGBoost",
+      "MAE": 50.45774261803308,
+      "RMSE": 67.46899880247612,
+      "MAPE": 0.9051740440755632,
+      "R2": 0.9953995650174075
+    },
+    {
+      "Model": "Random Forest",
+      "MAE": 54.74138511535232,
+      "RMSE": 72.67375408645901,
+      "MAPE": 0.9864611262191151,
+      "R2": 0.9946624057577266
+    },
+    {
+      "Model": "ANN",
+      "MAE": 69.84453936489416,
+      "RMSE": 90.15427326341062,
+      "MAPE": 1.2703322949787776,
+      "R2": 0.991785842990993
+    },
+    {
+      "Model": "Linear Regression",
+      "MAE": 84.50762696938122,
+      "RMSE": 110.72252562576105,
+      "MAPE": 1.5259945441116296,
+      "R2": 0.9876102559855197
+    },
+    {
+      "Model": "LSTM",
+      "MAE": 88.08874005073206,
+      "RMSE": 113.71908727760345,
+      "MAPE": 1.6044858452604993,
+      "R2": 0.9869305564634469
+    },
+    {
+      "Model": "Naive (last hour)",
+      "MAE": 167.81573869417255,
+      "RMSE": 214.05931190135826,
+      "MAPE": 3.0781056388939008,
+      "R2": 0.9536917236592413
+    },
+    {
+      "Model": "Seasonal naive (last week)",
+      "MAE": 585.3746623162474,
+      "RMSE": 780.725990901752,
+      "MAPE": 10.342598356730539,
+      "R2": 0.38399017170612515
+    }
+  ],
+  "horizon_backtest": [
+    {
+      "Method": "XGBoost (recursive)",
+      "Horizon (hours)": 24,
+      "MAE": 291.17938028971355,
+      "RMSE": 415.70704045178985,
+      "MAPE": 4.936171792964956
+    },
+    {
+      "Method": "Seasonal naive",
+      "Horizon (hours)": 24,
+      "MAE": 410.37708333333336,
+      "RMSE": 564.9064644183732,
+      "MAPE": 7.2532657683155675
+    },
+    {
+      "Method": "Holt-Winters",
+      "Horizon (hours)": 24,
+      "MAE": 443.1826848992611,
+      "RMSE": 565.5340158940717,
+      "MAPE": 8.444726137526683
+    },
+    {
+      "Method": "XGBoost (recursive)",
+      "Horizon (hours)": 72,
+      "MAE": 386.1128913031684,
+      "RMSE": 525.776564203191,
+      "MAPE": 6.8343279441554685
+    },
+    {
+      "Method": "Seasonal naive",
+      "Horizon (hours)": 72,
+      "MAE": 513.7840277777777,
+      "RMSE": 690.9644560423416,
+      "MAPE": 9.112597553444129
+    },
+    {
+      "Method": "Holt-Winters",
+      "Horizon (hours)": 72,
+      "MAE": 732.8359883598857,
+      "RMSE": 932.2801981192976,
+      "MAPE": 13.98435758511025
+    },
+    {
+      "Method": "XGBoost (recursive)",
+      "Horizon (hours)": 168,
+      "MAE": 442.2064018612816,
+      "RMSE": 584.88974570632,
+      "MAPE": 7.702324659166887
+    },
+    {
+      "Method": "Seasonal naive",
+      "Horizon (hours)": 168,
+      "MAE": 599.1032738095238,
+      "RMSE": 796.7096278451708,
+      "MAPE": 10.65451167052852
+    },
+    {
+      "Method": "Holt-Winters",
+      "Horizon (hours)": 168,
+      "MAE": 803.8040711533313,
+      "RMSE": 995.0960409538302,
+      "MAPE": 14.893239120840803
+    }
+  ],
+  "data_report": {
+    "raw_rows": 143206,
+    "was_sorted": false,
+    "duplicate_timestamps": 4,
+    "missing_hours": 30,
+    "outliers_replaced": 1,
+    "values_filled": 31,
+    "clean_rows": 143232,
+    "start": "2002-04-01 01:00:00",
+    "end": "2018-08-03 00:00:00"
+  },
+  "deployed_model": "XGBoost (retrained on all data)"
+}
